@@ -1,0 +1,123 @@
+{
+    "scopeName": "autolisp.injection",
+    "injectionSelector": "L:source.autolisp",
+    "patterns": [
+        {
+			"include": "#comment2"
+		},
+		{
+			"include": "#commentblock2"
+		},
+        {
+            "include": "#variable"
+        },
+        {
+            "include": "#privatefunction"
+        },
+        {
+            "include": "#definedfunction"
+        },
+        {
+            "include": "#operator"
+        },
+        {
+            "include": "#keywords"
+        }
+    ],
+    "repository": {
+        "comment2": {
+			"patterns": [
+				{
+					"name": "comment.line",
+					"begin": ";[^|](.*?)",
+					"end": "(?=$)",
+					"patterns": [
+						{
+							"name": "string.regexp",							
+							"begin": "(?i)@GLOBAL",
+							"end": "(?=$)",
+							"patterns": [
+								{
+									"name": "comment.line",
+									"match": ".*"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"commentblock2": {
+			"patterns": [
+				{
+					"name": "comment.block",
+					"begin": ";\\|",
+					"end": "\\|;",
+					"patterns": [
+						{
+							"name": "string.regexp",							
+							"begin": "^\\s*(?i)(@PARAM|@REMARKS|@DESCRIPTION|@RETURNS)(?=\\s.+)",
+							"end": "(\\n|\\s)"
+						},
+						{
+							"name": "keyword",							
+							"begin": "(?<=(?i)@PARAM\\s)\\S+",
+							"end": "(?=$)",
+							"patterns": [
+								{
+									"name": "comment.block",
+									"match": ".*"
+								}
+							]
+						}, 
+						{
+							"name": "string.regexp",							
+							"match": "(?i)@GLOBAL"
+						}
+					]
+				}
+			]
+		},
+        "variable": {
+            "patterns": [
+                {
+                    "name": "variable.autolisp",
+                    "match": "(?<=\\(|\\s|^)(arr_|attr_|atr_|block_|blk_|bol_|cnt_|cur_|collection_|col_|coll_|db_|dcl_|decr_|dict_|ent_|err_|enum_|file_|fil_|incr_|indx_|int_|list_|lst_|num_|name_|obj_|path_|pth_|pt_|real_|rea_|safe_|sset_|sel_|str_|sysvar_|var_|item_|itm_)(.*?)(?=\\s|\\(|\\))"
+                }
+            ]
+        },
+        "privatefunction": {
+            "patterns": [
+                
+                {
+                    "name": "privatefunction.autolisp",
+                    "match": "(?<=\\(|\\s|^)(acadObj|actvDoc|modelSpace|paperSpace)(?=\\s|\\(|\\))"
+                }
+            ]
+        },
+        "definedfunction": {
+            "patterns": [
+                {
+                    "name": "definedfunction.autolisp",
+                    "match": "(?<=|\\s|^)(SelectionSet->entList|SelectionSet->objList|list->string|3dPt->2dPt|consU|list->remove-duplicates|appendU|list->count-items|string->list|vlaSSet->eSSet|pad-str|sort-list|dict-delete-dict|dict-add-record|dict-update-record|dict-get-record|dict-del-record|dict-get-keys|dict-get-values|dict-get-keys-values)(?=\\s|\\))"
+                },
+                {
+                    "name": "definedfunction.autolisp",
+                    "match": "(?<=\\(|\\s|^)(c:|cl:|f:|fnc:|dcl:|sr:|sub:|uf:)(.*?)(?=\\s|\\(|\\))"
+                },
+                {
+                    "name": "definedfunction.autolisp",
+                    "match": "(?<=\\(|\\s|^)(MAIN|main)(?=\\s|\\(|\\))"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.autolisp",
+                    "match": "(?<=\\(|\\[|'|\\s|^)(?i:nil|NIL)(?=\\]|\\s|\\)|\\()"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,85 @@
+{
+	// Place your snippets for autolisp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"command line function w/subs": {
+		"prefix": "(defun c:MAIN",
+		"body": [
+			"(defun c:COMMAND (/ *error* main )",
+			"  (defun *error*(s)",
+			"    (princ s)",
+			"    (vla-EndUndoMark (actvDoc))",
+			"    (princ)",
+			"  )",
+			"  (defun sub:sub-routine ( / )",
+			"    (princ)",
+			"  )",
+			"  (defun sub:main ()",
+			"    (vla-StartUndoMark (actvDoc))",
+			"    ",
+			"    $0",
+			"    ",
+			"    (vla-EndUndoMark (actvDoc))",
+			"    (princ)",
+			"  )",
+			"  (sub:main)",
+			""
+		],
+		"description": "Command Func w/Subs"
+	},
+	"command line function": {
+		"prefix": "(defun c:COMMAND",
+		"body": [
+			"(defun c:COMMAND (/ *error* )",
+			"  (defun *error*(s)",
+			"    (princ s)",
+			"    (vla-EndUndoMark (actvDoc))",
+			"    (princ)",
+			"  )",
+			"  (vla-StartUndoMark (actvDoc))",
+			"    ",
+			"  $0",
+			"    ",
+			"  (vla-EndUndoMark (actvDoc))",
+			"  (princ)",
+			")"
+		],
+		"description": "Command Func"
+	},
+	"sub-routine": {
+		"prefix": "(defun sub:routine",
+		"body": [
+			"(defun sub:routine ( / )",
+			"  (princ)",
+			")"
+		],
+		"description": "Sub Routine"
+	},
+	"common library Function": {
+		"prefix": "(defun f:function",
+		"body": [
+			"(defun f:function ( / )",
+			"  (princ)",
+			")"
+		],
+		"description": "Common Library Function"
+	},
+	"active document": {
+		"prefix": "actvDoc",
+		"body": [
+			"(vla-get-ActiveDocument (vlax-get-Acad-Object))"
+		],
+		"description": "get ActiveDocument"
+	}
+
+}

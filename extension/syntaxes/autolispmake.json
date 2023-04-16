@@ -1,0 +1,81 @@
+{
+	"name": "autolispmake",
+	"scopeName":"source.autolispmake",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#commentblock"
+		},
+		{
+			"include": "#Symbols"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#numerics"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.line",
+					"match": ";[^\\|].*$"
+				}
+			]
+		},
+		"commentblock": {
+			"patterns": [
+				{
+					"name": "comment.block",
+					"begin": ";\\|",
+					"end": "\\|;",
+					"patterns": []
+				}
+			]
+		},
+		"Symbols": {
+			"patterns": [
+				{
+					"name": "symbol.autolisp",
+					"match": "(?<=\\')[:\\w\\+<>=\\-\\*]+(?=\\s|\\(|\\))"
+				}
+			]
+		},
+		"numerics": {
+			"patterns": [
+				{
+					"name": "constant.numeric",
+					"match": "(?<=^|\\s|\\(|\\')((([+,\\-]?\\d+\\.?\\d*)|(\\.\\d+))([e,E][+,\\-]?\\d+)?)(?=\\)|\"|\\'|\\s)"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"match": "\\\\."
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword",
+					"match": "(?<=\\(|\\[|'|\\s|^)(?i:VLISP-COMPILE|_VER|PRV-DEF|C:VLDEBUG|C:VLIDE|_vl-balance-parenthesis)(?=\\]|\\s|\\)|\\()"
+				},{
+					"name": "keyword",
+					"match": "(?<=\\(|\\[|'|\\s|^)(?i::constants-prefix|:target|:load-file-list|:lsp|:active-x|:separate-namespace|:protected|:require-file-list|:ob-directory|:tmp-directory|:optimization)(?=\\]|\\s|\\)|\\()"
+				}
+			]
+		}
+	}
+}

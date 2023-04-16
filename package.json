@@ -1,0 +1,46 @@
+{
+    "name": "lipinskicad-autolisp-extended",
+    "displayName": "LCAD AutoCAD AutoLISP Extension",
+	"description": "This is an extension of Autodesk's vscode extension for AutoCAD AutoLISP",
+    "version": "1.0.1",
+    "publisher": "Lipinski CAD Engineering & Development",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "icon": "images/Lipinski_CAD_Icon-1024.png",
+    "contributes": {
+        "languages": [
+            {
+                "id": "autolispmake",
+                "aliases": [
+                    "AutoLISPMake",
+                    "autolispmake"
+                ],
+                "extensions": [
+                    ".prv"
+                ],
+                "configuration": "./extension/smartBracket/language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "scopeName": "autolisp.injection",
+                "injectTo": [
+                    "source.autolisp"
+                ],
+                "path": "./extension/syntaxes/injection.json"
+            },
+			{
+				"language": "autolispmake",
+				"scopeName": "source.autolispmake",
+				"path": "./extension/syntaxes/autolispmake.json"
+			}
+        ],
+        "snippets": [
+			{
+				"language": "autolisp",
+				"path": "./snippets/snippets.json"
+			}
+		]
+    }
+}
